@@ -1,4 +1,4 @@
-# boar-stack https://codeship.com/projects/b2e179d0-a54b-0132-cbce-72e52541da30/status?branch=master
+# boar-stack [ ![Codeship Status for emartech/boar-stack](https://codeship.com/projects/b2e179d0-a54b-0132-cbce-72e52541da30/status?branch=master)](https://codeship.com/projects/66647)
 
 ## Example usage for app
 
