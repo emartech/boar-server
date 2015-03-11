@@ -9,7 +9,6 @@ var methodOverride = require('koa-methodoverride');
 var HookMiddlewareFactory = require('./middlewares/hook');
 var bodyparser = require('koa-bodyparser');
 var requestId = require('koa-request-id');
-var mongoose = require('mongoose');
 
 
 var App = function(koaApp) {
@@ -43,14 +42,6 @@ App.prototype = {
         require(path + '/' + file);
       }
     }.bind(this));
-  },
-
-
-  connectToMongoose: function(uri) {
-    mongoose.connect(uri);
-    mongoose.connection.on('error', function (err) {
-      console.log('connect to mongo error', err);
-    });
   },
 
 

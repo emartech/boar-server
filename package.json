@@ -31,7 +31,6 @@
     "koa-router": "3.8.0",
     "koa-static": "1.4.9",
     "lodash": "3.1.0",
-    "logentries-logformat": "0.0.2",
-    "mongoose": "3.8.22"
+    "logentries-logformat": "0.0.2"
   }
 }
