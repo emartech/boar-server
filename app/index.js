@@ -18,12 +18,9 @@ var App = function(koaApp) {
 App.prototype = {
 
   addCorsSupportMiddleware: function() {
-    this.addMiddleware(cors());
-    this.addMiddleware(function* (next) {
-      this.set('Access-Control-Allow-Origin', '*');
-      this.set('Access-Control-Allow-Headers', 'X-Requested-With');
-      yield next;
-    });
+    this.addMiddleware(cors({
+      headers: 'X-Requested-With'
+    }));
   },
 
 
