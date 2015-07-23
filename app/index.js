@@ -19,6 +19,7 @@ App.prototype = {
 
   addCorsSupportMiddleware: function() {
     this.addMiddleware(cors({
+      origin: '*',
       headers: 'X-Requested-With'
     }));
   },
