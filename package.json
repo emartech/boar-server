@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/emartech/boar-stack",
   "devDependencies": {
-    "chai": "3.0.0",
+    "chai": "3.2.0",
     "co-mocha": "1.1.2",
     "mocha": "2.2.5"
   },
@@ -25,12 +25,12 @@
     "app-root-path": "1.0.0",
     "koa-bodyparser": "2.0.0",
     "koa-cors": "0.0.16",
-    "koa-jade": "0.3.1",
+    "koa-jade": "1.1.0",
     "koa-methodoverride": "0.4.2",
     "koa-request-id": "1.0.1",
     "koa-router": "5.1.2",
     "koa-static": "1.4.9",
-    "lodash": "3.9.3",
-    "logentries-logformat": "0.0.2"
+    "lodash": "3.10.1",
+    "logentries-logformat": "0.0.3"
   }
 }
