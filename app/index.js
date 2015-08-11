@@ -75,10 +75,8 @@ App.prototype = {
   },
 
 
-  addBodyParseMiddleware: function() {
-    this.addMiddleware(bodyparser({
-      jsonLimit: '100mb'
-    }));
+  addBodyParseMiddleware: function(options) {
+    this.addMiddleware(bodyparser(options));
   },
 
 
