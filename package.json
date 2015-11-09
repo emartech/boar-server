@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec --harmony --require co-mocha --recursive ./**/*.spec.js"
+    "test": "mocha --reporter spec --harmony --require co-mocha --recursive ./**/*.spec.js",
+    "release-patch": "npm version patch -m 'chore(package): update version to %s'",
+    "release-minor": "npm version minor -m 'chore(package): update version to %s'",
+    "release-major": "npm version major -m 'chore(package): update version to %s'"
   },
   "repository": {
     "type": "git",
