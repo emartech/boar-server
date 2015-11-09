@@ -1,6 +1,6 @@
 {
-  "name": "boar-stack",
-  "version": "0.8.0",
+  "name": "boar-server",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/emartech/boar-stack.git"
+    "url": "https://github.com/emartech/boar-server.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/emartech/boar-stack/issues"
+    "url": "https://github.com/emartech/boar-server/issues"
   },
-  "homepage": "https://github.com/emartech/boar-stack",
+  "homepage": "https://github.com/emartech/boar-server",
   "devDependencies": {
     "chai": "3.2.0",
     "co-mocha": "1.1.2",
