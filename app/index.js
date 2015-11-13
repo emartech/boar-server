@@ -70,8 +70,8 @@ App.prototype = {
   },
 
 
-  addErrorHandlerMiddleware: function() {
-    this.addMiddleware(errorHandlerMiddleware);
+  addErrorHandlerMiddleware: function(renderPath) {
+    this.addMiddleware(errorHandlerMiddleware(renderPath));
   },
 
 
