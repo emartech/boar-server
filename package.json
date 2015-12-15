@@ -34,6 +34,6 @@
     "koa-router": "5.1.2",
     "koa-static": "1.4.9",
     "lodash": "3.10.1",
-    "logentries-logformat": "0.0.3"
+    "logentries-logformat": "0.1.4"
   }
 }
