@@ -1,5 +1,6 @@
 'use strict';
 
+var http = require('http');
 var fs = require('fs');
 var serve = require('koa-static');
 var cors = require('koa-cors');
@@ -86,7 +87,20 @@ App.prototype = {
 
 
   listen: function(port, env) {
-    this.koaApp.listen(port);
+    var server = http.createServer(koaApp.callback()).listen(port)
+
+    process.on('SIGTERM', function () {
+      console.log('Starting graceful shutdown...')
+      server.close(function (err) {
+        if (err) {
+          console.log('Graceful shutdown failed', err)
+          process.exit(1)
+        }
+        console.log('Graceful shutdown succeeded')
+        process.exit(0)
+      })
+    })
+
     console.log('Application started:', { port: port, env: env });
   }
 
