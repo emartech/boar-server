@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec --harmony --require co-mocha --recursive ./**/*.spec.js",
-    "release-patch": "npm version patch -m 'chore(package): update version to %s'",
-    "release-minor": "npm version minor -m 'chore(package): update version to %s'",
-    "release-major": "npm version major -m 'chore(package): update version to %s'"
+    "test": "mocha $(find lib -name \"*.spec.js\") --require co-mocha",
+    "prepublish": "npm test",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/emartech/boar-server.git"
+    "url": "git+https://github.com/emartech/boar-server.git"
+  },
+  "release": {
+    "verifyConditions": {
+      "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +26,8 @@
   "devDependencies": {
     "chai": "3.2.0",
     "co-mocha": "1.1.2",
-    "mocha": "2.2.5"
+    "mocha": "2.2.5",
+    "semantic-release": "4.3.5"
   },
   "dependencies": {
     "app-root-path": "1.0.0",
