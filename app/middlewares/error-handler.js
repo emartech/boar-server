@@ -21,7 +21,7 @@ module.exports = function(errorPage) {
     try {
       yield next;
     } catch (ex) {
-      if (ex.code === 401) {
+      if (ex.code === 401 || ex.status === 401) {
         this.status = 401;
         renderError(this, 'We\'re sorry, but You are not authorized to take this action');
         logger.error('authentication', ex.message);
