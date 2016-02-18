@@ -3,7 +3,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha $(find lib -name \"*.spec.js\") --require co-mocha",
+    "test": "mocha $(find . -name \"*.spec.js\" -not -path \"./node_modules/*\") --require co-mocha",
     "prepublish": "npm test",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
