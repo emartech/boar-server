@@ -23,21 +23,21 @@
   },
   "homepage": "https://github.com/emartech/boar-server",
   "devDependencies": {
-    "chai": "3.2.0",
+    "chai": "3.5.0",
     "co-mocha": "1.1.2",
-    "mocha": "2.2.5",
+    "mocha": "2.4.5",
     "semantic-release": "4.3.5"
   },
   "dependencies": {
     "app-root-path": "1.0.0",
-    "koa-bodyparser": "2.0.0",
+    "koa-bodyparser": "2.0.1",
     "koa-cors": "0.0.16",
-    "koa-jade": "1.1.0",
-    "koa-methodoverride": "0.4.2",
+    "koa-jade": "2.1.0",
+    "koa-methodoverride": "2.0.0",
     "koa-request-id": "1.0.1",
-    "koa-router": "5.1.2",
-    "koa-static": "1.4.9",
-    "lodash": "3.10.1",
+    "koa-router": "5.4.0",
+    "koa-static": "2.0.0",
+    "lodash": "4.6.0",
     "logentries-logformat": "0.1.4"
   }
 }
