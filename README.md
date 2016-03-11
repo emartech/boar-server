@@ -53,7 +53,8 @@ put these lines in your server.js
 ```
 
 ## HTTPS support
-To enable HTTPS support, simple create `SERVE_HTTPS` environment variable with value `true`. The port for https will be the
+To enable HTTPS support, simple create `SERVE_HTTPS` environment variable with value `true`.
+The port for https will be the port of the application increased with 10000 (10k).
 
 If you want to serve the requests with your own SSL certification, create `HTTPS_KEY` and `HTTPS_CERT`
 environment variables with path of the files as values.
