@@ -92,23 +92,32 @@ App.prototype = {
 
   listen: function(port, env) {
     var httpPort = parseInt(port);
-    var httpsPort = httpPort + 10000;
-
-    http.createServer(this.koaApp.callback()).listen(httpPort);
-    console.log('Application started:', { port: httpPort, env: env });
+    this._startHTTPServer(httpPort, env);
 
     if (process.env.SERVE_HTTPS === 'true') {
-      var httpsOptions = {};
-      if (process.env.HTTPS_KEY && process.env.HTTPS_CERT) {
-        httpsOptions.key = fs.readFileSync(process.env.HTTPS_KEY);
-        httpsOptions.cert = fs.readFileSync(process.env.HTTPS_CERT);
-      }
-
-      this.addMiddleware(sslify({ port: httpsPort }));
-
-      https.createServer(httpsOptions, this.koaApp.callback()).listen(httpsPort);
-      console.log('Application started (with SSL):', { port: httpsPort, env: env });
+      var httpsPort = httpPort + 10000;
+      this._startHTTPSServer(httpsPort, env);
     }
+  },
+
+
+  _startHTTPServer: function(port, env) {
+    http.createServer(this.koaApp.callback()).listen(port);
+    console.log('Application started:', { port: port, env: env });
+  },
+
+
+  _startHTTPSServer: function(port, env) {
+    var httpsOptions = {};
+    if (process.env.HTTPS_KEY && process.env.HTTPS_CERT) {
+      httpsOptions.key = fs.readFileSync(process.env.HTTPS_KEY);
+      httpsOptions.cert = fs.readFileSync(process.env.HTTPS_CERT);
+    }
+
+    this.addMiddleware(sslify({ port: port }));
+
+    https.createServer(httpsOptions, this.koaApp.callback()).listen(port);
+    console.log('Application started (with SSL):', { port: port, env: env });
   }
 
 };
