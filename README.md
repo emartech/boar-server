@@ -51,3 +51,18 @@ put these lines in your server.js
     router.get('/list', ControllerFactory.loadByAcceptType('main/actions/list/get'));
   });
 ```
+
+## HTTPS support
+To enable HTTPS support, simple create `SERVE_HTTPS` environment variable with value `true`. The port for https will be the
+
+If you want to serve the requests with your own SSL certification, create `HTTPS_KEY` and `HTTPS_CERT`
+environment variables with path of the files as values.
+
+### Example
+```
+export SERVE_HTTPS=true
+export HTTPS_KEY="path/to/cert.key"
+export HTTPS_CERT="path/to/cert.crt"
+
+node server.js
+```
