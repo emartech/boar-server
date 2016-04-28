@@ -1,14 +1,17 @@
 'use strict';
 
 var fs = require('fs');
+var http = require('http');
+var https = require('https');
 var serve = require('koa-static');
 var cors = require('koa-cors');
-var jade = require('koa-jade');
+var Jade = require('koa-jade');
 var errorHandlerMiddleware = require('./middlewares/error-handler');
 var methodOverride = require('koa-methodoverride');
 var HookMiddlewareFactory = require('./middlewares/hook');
 var bodyparser = require('koa-bodyparser');
 var requestId = require('koa-request-id');
+var sslify = require('koa-sslify');
 
 
 var App = function(koaApp) {
@@ -53,10 +56,12 @@ App.prototype = {
 
 
   addDynamicViewMiddleware: function(root, cache) {
-    this.addMiddleware(jade.middleware({
+    var jadeMiddleware = new Jade({
       viewPath: root,
       noCache: !cache
-    }));
+    });
+
+    jadeMiddleware.use(this.koaApp);
   },
 
 
@@ -86,8 +91,33 @@ App.prototype = {
 
 
   listen: function(port, env) {
-    this.koaApp.listen(port);
+    var httpPort = parseInt(port);
+    this._startHTTPServer(httpPort, env);
+
+    if (process.env.SERVE_HTTPS === 'true') {
+      var httpsPort = httpPort + 10000;
+      this._startHTTPSServer(httpsPort, env);
+    }
+  },
+
+
+  _startHTTPServer: function(port, env) {
+    http.createServer(this.koaApp.callback()).listen(port);
     console.log('Application started:', { port: port, env: env });
+  },
+
+
+  _startHTTPSServer: function(port, env) {
+    var httpsOptions = {};
+    if (process.env.HTTPS_KEY && process.env.HTTPS_CERT) {
+      httpsOptions.key = fs.readFileSync(process.env.HTTPS_KEY);
+      httpsOptions.cert = fs.readFileSync(process.env.HTTPS_CERT);
+    }
+
+    this.addMiddleware(sslify({ port: port }));
+
+    https.createServer(httpsOptions, this.koaApp.callback()).listen(port);
+    console.log('Application started (with SSL):', { port: port, env: env });
   }
 
 };

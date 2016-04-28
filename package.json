@@ -1,17 +1,20 @@
 {
   "name": "boar-server",
-  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec --harmony --require co-mocha --recursive ./**/*.spec.js",
-    "release-patch": "npm version patch -m 'chore(package): update version to %s'",
-    "release-minor": "npm version minor -m 'chore(package): update version to %s'",
-    "release-major": "npm version major -m 'chore(package): update version to %s'"
+    "test": "mocha $(find . -name \"*.spec.js\" -not -path \"./node_modules/*\") --require co-mocha",
+    "prepublish": "npm test",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/emartech/boar-server.git"
+    "url": "git+https://github.com/emartech/boar-server.git"
+  },
+  "release": {
+    "verifyConditions": {
+      "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -20,20 +23,22 @@
   },
   "homepage": "https://github.com/emartech/boar-server",
   "devDependencies": {
-    "chai": "3.2.0",
+    "chai": "3.5.0",
     "co-mocha": "1.1.2",
-    "mocha": "2.2.5"
+    "mocha": "2.4.5",
+    "semantic-release": "4.3.5"
   },
   "dependencies": {
     "app-root-path": "1.0.0",
-    "koa-bodyparser": "2.0.0",
+    "koa-bodyparser": "2.0.1",
     "koa-cors": "0.0.16",
-    "koa-jade": "1.1.0",
-    "koa-methodoverride": "0.4.2",
+    "koa-jade": "2.1.0",
+    "koa-methodoverride": "2.0.0",
     "koa-request-id": "1.0.1",
-    "koa-router": "5.1.2",
-    "koa-static": "1.4.9",
-    "lodash": "3.10.1",
-    "logentries-logformat": "0.0.3"
+    "koa-router": "5.4.0",
+    "koa-sslify": "1.0.1",
+    "koa-static": "2.0.0",
+    "lodash": "4.6.0",
+    "logentries-logformat": "0.1.4"
   }
 }
