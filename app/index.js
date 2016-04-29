@@ -12,6 +12,7 @@ var HookMiddlewareFactory = require('./middlewares/hook');
 var bodyparser = require('koa-bodyparser');
 var requestId = require('koa-request-id');
 var sslify = require('koa-sslify');
+var SecurityMiddlewareFactory = require('../lib/security-middleware-factory');
 
 
 var App = function(koaApp) {
@@ -87,6 +88,13 @@ App.prototype = {
 
   addRequestIdmiddleware: function() {
     this.addMiddleware(requestId());
+  },
+
+
+  addSecurityMiddlewares: function(options) {
+    new SecurityMiddlewareFactory(options)
+      .getMiddlewares()
+      .forEach(this.addMiddleware, this);
   },
 
 

@@ -15,7 +15,8 @@ module.exports = {
     maskEmailAddress: require('./lib/mask-email-address'),
     exceptionHandler: require('./lib/exception-handler'),
     clearCollections: require('./lib/clear-collections'),
-    clearGridfs: require('./lib/clear-gridfs')
+    clearGridfs: require('./lib/clear-gridfs'),
+    securityMiddlewareFactory: require('./lib/security-middleware-factory')
   }
 
 };
