@@ -11,7 +11,7 @@ var methodOverride = require('koa-methodoverride');
 var HookMiddlewareFactory = require('./middlewares/hook');
 var bodyparser = require('koa-bodyparser');
 var requestId = require('koa-request-id');
-var sslify = require('koa-sslify');
+var ssl = require('koa-ssl');
 var SecurityMiddlewareFactory = require('../lib/security-middleware-factory');
 
 
@@ -98,6 +98,11 @@ App.prototype = {
   },
 
 
+  addEnforceSSLMiddleware: function(options) {
+    this.addMiddleware(ssl(options));
+  },
+
+
   listen: function(port, env) {
     var httpPort = parseInt(port);
     this._startHTTPServer(httpPort, env);
@@ -121,8 +126,6 @@ App.prototype = {
       httpsOptions.key = fs.readFileSync(process.env.HTTPS_KEY);
       httpsOptions.cert = fs.readFileSync(process.env.HTTPS_CERT);
     }
-
-    this.addMiddleware(sslify({ port: port }));
 
     https.createServer(httpsOptions, this.koaApp.callback()).listen(port);
     console.log('Application started (with SSL):', { port: port, env: env });
