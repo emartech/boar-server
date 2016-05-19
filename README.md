@@ -111,3 +111,19 @@ export HTTPS_CERT="path/to/cert.crt"
 
 node server.js
 ```
+
+### Enforce HTTPS
+
+Add the [koa-ssl](https://github.com/jclem/koa-ssl) middlware:
+```
+  var app = new App(koaApp);
+  app.addEnforceSSLMiddleware();
+```
+
+If your application is running behind reverse proxy you should set the trustProxy configiration option for detecting the x-forwarded-proto header.
+```
+  var app = new App(koaApp);
+  app.addEnforceSSLMiddleware({ trustProxy: true });
+```
+
+If you use this middleware this middleware should be the first you add.
