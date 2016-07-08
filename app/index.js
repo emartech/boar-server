@@ -10,7 +10,7 @@ var errorHandlerMiddleware = require('./middlewares/error-handler');
 var methodOverride = require('koa-methodoverride');
 var HookMiddlewareFactory = require('./middlewares/hook');
 var bodyparser = require('koa-bodyparser');
-var requestId = require('koa-request-id');
+var requestId = require('koa-requestid');
 var ssl = require('koa-ssl');
 var SecurityMiddlewareFactory = require('../lib/security-middleware-factory');
 
@@ -29,16 +29,18 @@ App.prototype = {
 
 
   loadControllers: function(path) {
-    fs.readdirSync(path).forEach(function (file) {
+    fs.readdirSync(path).forEach(function(file) {
       var filePath = path + '/' + file + '/index.js';
-      if (!fs.existsSync(filePath)) return;
+      if (!fs.existsSync(filePath)) {
+        return;
+      }
       require(filePath)(this.koaApp);
     }.bind(this));
   },
 
 
   loadModels: function(path) {
-    fs.readdirSync(path).forEach(function (file) {
+    fs.readdirSync(path).forEach(function(file) {
       if (/(.*)\.(js$)/.test(file) && !/(.*)\.(spec.js$)/.test(file)) {
         require(path + '/' + file);
       }
@@ -86,8 +88,9 @@ App.prototype = {
   },
 
 
-  addRequestIdmiddleware: function() {
-    this.addMiddleware(requestId());
+  addRequestIdmiddleware: function(options) {
+    options = options || { expose: false, header: 'request-id', query: 'request-id' };
+    this.addMiddleware(requestId(options));
   },
 
 
