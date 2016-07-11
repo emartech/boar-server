@@ -89,7 +89,7 @@ App.prototype = {
 
 
   addRequestIdmiddleware: function(options) {
-    options = options || { expose: false, header: 'request-id', query: 'request-id' };
+    options = options || { expose: 'x-request-id', header: 'x-request-id', query: 'x-request-id' };
     this.addMiddleware(requestId(options));
   },
 
