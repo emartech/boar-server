@@ -194,7 +194,7 @@ Provides middlewares for setting up various security related HTTP headers.
 
 ### ControllerFactory
 ``` javascript
-  var ControllerFactory = require('boar-server.lib.controllerFactory');
+  var ControllerFactory = require('boar-server').lib.controllerFactory;
 
   module.exports = ControllerFactory.create(function(router) {
     router.get('/', ControllerFactory.load('main/actions/get'));
