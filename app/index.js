@@ -5,7 +5,7 @@ var http = require('http');
 var https = require('https');
 var serve = require('koa-static');
 var cors = require('koa-cors');
-var Jade = require('koa-jade');
+var Pug = require('koa-pug');
 var errorHandlerMiddleware = require('./middlewares/error-handler');
 var methodOverride = require('koa-methodoverride');
 var HookMiddlewareFactory = require('./middlewares/hook');
@@ -59,12 +59,12 @@ App.prototype = {
 
 
   addDynamicViewMiddleware: function(root, cache) {
-    var jadeMiddleware = new Jade({
+    var pugMiddleware = new Pug({
       viewPath: root,
       noCache: !cache
     });
 
-    jadeMiddleware.use(this.koaApp);
+    pugMiddleware.use(this.koaApp);
   },
 
 
