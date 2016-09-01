@@ -64,11 +64,11 @@ node server.js
 
 ### Dynamic View
 
-This middleware is a wrapper for [koa-jade](https://github.com/chrisyip/koa-jade).
+This middleware is a wrapper for [koa-pug](https://github.com/chrisyip/koa-pug).
 
 | Param | Type  | Description |
 | ----- | ----- | ----------- |
-| __path__ | `String` | Path to the jade files |
+| __path__ | `String` | Path to the pug files |
 
 ``` javascript
   app.addDynamicViewMiddleware(path);
@@ -84,7 +84,7 @@ This middleware is a wrapper for [koa-jade](https://github.com/chrisyip/koa-jade
 
 | Param | Type  | Description |
 | ----- | ----- | ----------- |
-| __path__ | `String` | Path to error page jade template |
+| __path__ | `String` | Path to error page pug template |
 
 ``` javascript
   app.addErrorHandlerMiddleware(path);
