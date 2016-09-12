@@ -123,7 +123,8 @@ This middleware is a wrapper for [koa-pug](https://github.com/chrisyip/koa-pug).
   app.addEnforceSSLMiddleware();
 ```
 
-If your application is running behind reverse proxy you should set the trustProxy configiration option for detecting the x-forwarded-proto header.
+If your application is running behind reverse proxy (like Heroku) you should set the trustProxy configuration option to *true* in order to process the x-forwarded-proto header.
+
 ``` javascript
   var app = new App(koaApp);
   app.addEnforceSSLMiddleware({ trustProxy: true });
