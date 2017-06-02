@@ -206,6 +206,24 @@ Provides middlewares for setting up various security related HTTP headers.
 
 ### ClearCollection
 
+```javascript
+  var clearCollections = require('boar-server').lib.clearCollections(mongoose);
+  
+  clearCollections(); // returns a promise
+```
+
+This will _drop_ all your collections.
+
+### TruncateCollection
+
+```javascript
+  var truncateCollections = require('boar-server').lib.truncateCollections(mongoose);
+  
+  truncateCollections(); // returns a promise
+```
+
+This will _truncate_ all your collections.
+
 ### ClearGridfs
 
 ### Database
