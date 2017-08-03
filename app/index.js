@@ -17,6 +17,7 @@ var SecurityMiddlewareFactory = require('../lib/security-middleware-factory');
 
 var App = function(koaApp) {
   this.koaApp = koaApp;
+  this._servers = [];
 };
 
 App.prototype = {
@@ -117,8 +118,15 @@ App.prototype = {
   },
 
 
+  close: function() {
+    const serverClosingPromises = this._servers.map(this._closeServer.bind(this));
+    return Promise.all(serverClosingPromises).then(() => {});
+  },
+
+
   _startHTTPServer: function(port, env) {
-    http.createServer(this.koaApp.callback()).listen(port);
+    const server = http.createServer(this.koaApp.callback()).listen(port);
+    this._servers.push(server);
     console.log('Application started:', { port: port, env: env });
   },
 
@@ -130,8 +138,15 @@ App.prototype = {
       httpsOptions.cert = fs.readFileSync(process.env.HTTPS_CERT);
     }
 
-    https.createServer(httpsOptions, this.koaApp.callback()).listen(port);
+    const server = https.createServer(httpsOptions, this.koaApp.callback()).listen(port);
+    this._servers.push(server);
     console.log('Application started (with SSL):', { port: port, env: env });
+  },
+
+
+  _closeServer: function(server) {
+    this._servers = this._servers.filter(storedServer => storedServer !== server);
+    return new Promise(resolve => server.close(resolve));
   }
 
 };
