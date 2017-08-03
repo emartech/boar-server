@@ -1,4 +1,4 @@
-# Boar Server 
+# Boar Server
 
 ## Example usage for app
 
@@ -26,6 +26,19 @@ put these lines in your server.js
   var cors = require('koa-cors');
   var app = new App(koaApp);
   app.addMiddleware(cors());
+```
+
+## Graceful shutdown
+You can stop the server from recieving new connections with `app.close()`. It returns a Promise that resolves when all existing connections are ended.
+``` javascript
+  var app = new App(koaApp);
+  app.listen(config.port);
+  process.on('SIGTERM', () => {
+    app.close().then(() => {
+      // additional cleaning (e.g. closing db connection)
+      process.exit(0);
+    })
+  })
 ```
 
 ## HTTPS support
@@ -208,7 +221,7 @@ Provides middlewares for setting up various security related HTTP headers.
 
 ```javascript
   var clearCollections = require('boar-server').lib.clearCollections(mongoose);
-  
+
   clearCollections(); // returns a promise
 ```
 
@@ -218,7 +231,7 @@ This will _drop_ all your collections.
 
 ```javascript
   var truncateCollections = require('boar-server').lib.truncateCollections(mongoose);
-  
+
   truncateCollections(); // returns a promise
 ```
 
