@@ -217,17 +217,23 @@ Provides middlewares for setting up various security related HTTP headers.
   });
 ```
 
-### ClearCollection
+### ClearCollections
+
+***deprecated*** aliased to `dropCollections`
+
+Use the more descriptively named `dropCollections` instead.
+
+### DropCollections
 
 ```javascript
-  var clearCollections = require('boar-server').lib.clearCollections(mongoose);
-
-  clearCollections(); // returns a promise
+  var dropCollections = require('boar-server').lib.dropCollections(mongoose);
+  
+  dropCollections(); // returns a promise
 ```
 
 This will _drop_ all your collections.
 
-### TruncateCollection
+### TruncateCollections
 
 ```javascript
   var truncateCollections = require('boar-server').lib.truncateCollections(mongoose);
