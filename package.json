@@ -37,12 +37,12 @@
     "koa-cors": "0.0.16",
     "koa-helmet": "3.2.0",
     "koa-methodoverride": "2.0.0",
-    "koa-pug": "3.0.0-0",
+    "koa-pug": "3.0.0-2",
     "koa-requestid": "1.0.0",
     "koa-router": "5.4.0",
     "koa-ssl": "2.0.0",
     "koa-static": "2.0.0",
-    "lodash": "4.15.0",
+    "lodash": "4.17.10",
     "logentries-logformat": "0.2.0"
   }
 }
