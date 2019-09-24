@@ -3,18 +3,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha $(find . -name \"*.spec.js\" -not -path \"./node_modules/*\") --require co-mocha && nsp check",
+    "test": "npm run test:unit && npm run test:security",
+    "test:unit": "mocha --require co-mocha */**/*.spec.js",
+    "test:security": "npm audit --json | audit-filter",
     "prepublish": "npm test",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emartech/boar-server.git"
-  },
-  "release": {
-    "verifyConditions": {
-      "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
-    }
   },
   "author": "",
   "license": "MIT",
@@ -23,26 +20,26 @@
   },
   "homepage": "https://github.com/emartech/boar-server",
   "devDependencies": {
-    "chai": "3.5.0",
-    "co-mocha": "1.1.3",
-    "mocha": "3.0.2",
-    "nsp": "2.6.1",
-    "semantic-release": "4.3.5",
-    "sinon": "1.17.5",
-    "sinon-chai": "2.12.0"
+    "audit-filter": "^0.5.0",
+    "chai": "4.2.0",
+    "co-mocha": "1.2.2",
+    "mocha": "6.2.0",
+    "semantic-release": "15.13.24",
+    "sinon": "7.5.0",
+    "sinon-chai": "3.3.0"
   },
   "dependencies": {
-    "app-root-path": "1.3.0",
-    "koa-bodyparser": "2.2.0",
+    "app-root-path": "2.2.1",
+    "koa-bodyparser": "4.2.1",
     "koa-cors": "0.0.16",
-    "koa-helmet": "3.2.0",
+    "koa-helmet": "5.1.0",
     "koa-methodoverride": "2.0.0",
-    "koa-pug": "3.0.0-2",
-    "koa-requestid": "1.0.0",
-    "koa-router": "5.4.0",
-    "koa-ssl": "2.0.0",
-    "koa-static": "2.0.0",
-    "lodash": "4.17.10",
+    "koa-pug": "4.0.2",
+    "koa-requestid": "2.0.1",
+    "koa-router": "7.4.0",
+    "koa-ssl": "2.0.1",
+    "koa-static": "5.0.0",
+    "lodash": "4.17.15",
     "logentries-logformat": "0.2.0"
   }
 }
