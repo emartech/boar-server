@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/emartech/boar-server",
   "devDependencies": {
-    "audit-filter": "^0.5.0",
+    "audit-filter": "0.5.0",
     "chai": "4.2.0",
     "co-mocha": "1.2.2",
     "mocha": "6.2.0",
