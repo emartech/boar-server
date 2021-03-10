@@ -3,7 +3,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha $(find . -name \"*.spec.js\" -not -path \"./node_modules/*\") --require co-mocha && nsp check",
+    "test": "mocha $(find . -name \"*.spec.js\" -not -path \"./node_modules/*\") --require co-mocha",
     "prepublish": "npm test",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -21,6 +21,9 @@
   "bugs": {
     "url": "https://github.com/emartech/boar-server/issues"
   },
+  "engines": {
+    "node": ">=10.18"
+  },
   "homepage": "https://github.com/emartech/boar-server",
   "devDependencies": {
     "chai": "3.5.0",
@@ -37,12 +40,12 @@
     "koa-cors": "0.0.16",
     "koa-helmet": "3.2.0",
     "koa-methodoverride": "2.0.0",
-    "koa-pug": "3.0.0-2",
+    "koa-pug": "4.0.4",
     "koa-requestid": "1.0.0",
     "koa-router": "5.4.0",
     "koa-ssl": "2.0.0",
     "koa-static": "2.0.0",
-    "lodash": "4.17.10",
+    "lodash": "4.17.15",
     "logentries-logformat": "0.2.0"
   }
 }
