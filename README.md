@@ -183,7 +183,7 @@ Provides middlewares for setting up various security related HTTP headers.
     },
     hsts: {
       maxAge: 30,
-      includeSubdomains: true,
+      includeSubDomains: true,
       preload: false
     },
     useXssFilter: true,

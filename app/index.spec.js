@@ -30,7 +30,7 @@ describe('App', () => {
   let envSnapshot;
 
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     envSnapshot = Object.assign({}, process.env);
   });
 
