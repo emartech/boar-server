@@ -1,6 +1,8 @@
 'use strict';
 
-var logger = require('logentries-logformat')('app');
+const { createLogger } = require('@emartech/json-logger');
+
+var logger = createLogger('app');
 
 var errorPagePath;
 
@@ -24,11 +26,11 @@ module.exports = function(errorPage) {
       if (ex.code === 401) {
         this.status = 401;
         renderError(this, 'We\'re sorry, but You are not authorized to take this action');
-        logger.error('authentication', ex.message);
+        logger.error('authentication', { message: ex.message });
       } else {
         this.status = 500;
         renderError(this, 'We\'re sorry, but something went wrong');
-        logger.error('internal', ex.message, { stack: ex.stack });
+        logger.fromError('internal', ex);
       }
     }
   }
