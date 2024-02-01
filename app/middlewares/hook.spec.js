@@ -2,6 +2,7 @@
 
 var expect = require('chai').expect;
 var hook = require('./hook');
+const co = require('co');
 
 describe('Hook Middleware', function() {
 
@@ -18,7 +19,7 @@ describe('Hook Middleware', function() {
     });
 
 
-    it('should call the given hook', function* () {
+    it('should call the given hook', co.wrap(function* () {
       var middleware = hook.getMiddleware();
       var called = false;
       var hookSpy = function () { called = true; };
@@ -27,10 +28,10 @@ describe('Hook Middleware', function() {
       yield middleware(function* () {});
 
       expect(called).to.eql(true);
-    });
+    }));
 
 
-    it('should call the hooks in the given order before next', function* () {
+    it('should call the hooks in the given order before next', co.wrap(function* () {
       var middleware = hook.getMiddleware();
       var called = [];
       var next = function* () { called.push('next'); };
@@ -42,10 +43,10 @@ describe('Hook Middleware', function() {
       yield middleware(next);
 
       expect(called).to.eql(['hookSpy1', 'hookSpy2',  'next']);
-    });
+    }));
 
 
-    it('should call the given hook in the context of the middleware', function* () {
+    it('should call the given hook in the context of the middleware', co.wrap(function* () {
       var context = {};
       var middleware = hook.getMiddleware();
       var calledwith = null;
@@ -55,13 +56,13 @@ describe('Hook Middleware', function() {
       yield middleware.call(context, function* () {});
 
       expect(calledwith).to.equal(context);
-    });
+    }));
 
   });
 
   describe('#reset', function() {
 
-    it('should remove all the hooks', function* () {
+    it('should remove all the hooks', co.wrap(function* () {
       var middleware = hook.getMiddleware();
       var called = false;
       var hookSpy = function () { called = true; };
@@ -71,7 +72,7 @@ describe('Hook Middleware', function() {
       yield middleware(function* () {});
 
       expect(called).to.eql(false);
-    });
+    }));
 
   });
 
