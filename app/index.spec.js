@@ -5,6 +5,7 @@ const https = require('https');
 const expect = require('chai').expect;
 const sinon = require('sinon');
 const App = require('./');
+const co = require('co');
 
 let sandbox;
 
@@ -57,7 +58,7 @@ describe('App', () => {
     });
 
 
-    it('should return a promise that resolves after all servers had closed', function* () {
+    it('should return a promise that resolves after all servers had closed', co.wrap(function* () {
       process.env.SERVE_HTTPS = 'true';
 
       let httpServerClosedCallback;
@@ -81,8 +82,7 @@ describe('App', () => {
       httpsServerClosedCallback();
       yield tick();
       expect(closeResolved).to.be.true;
-    });
-
+    }));
 
     it('should not call close on already closed servers', function() {
       const httpServer = createFakeServer();
