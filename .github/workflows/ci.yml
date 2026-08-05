@@ -12,13 +12,13 @@ jobs:
     strategy:
       matrix:
         node:
-          - 20
           - 22
           - 24
+          - 26
     name: Node.js ${{ matrix.node }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
       - name: Build
@@ -28,20 +28,20 @@ jobs:
   publish:
     needs: [test]
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     permissions:
       contents: write
       issues: write
       pull-requests: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
       - name: Build
         run: npm install
       - name: Publish package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISHER_TOKEN }}
         run: CI=true npm run semantic-release
